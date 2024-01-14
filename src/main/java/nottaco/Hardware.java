@@ -10,7 +10,7 @@ public class Hardware {
   private final Type type;
   
   public enum Type {
-    WRAP, PROTEIN, VEGGIES, CHEESE, SAUCE
+    CASE, CPU, GPU, STORAGE, COOLING
   }
 
 }

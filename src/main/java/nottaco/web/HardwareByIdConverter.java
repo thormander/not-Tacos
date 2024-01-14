@@ -15,26 +15,26 @@ public class HardwareByIdConverter implements Converter<String, Hardware> {
   private Map<String, Hardware> ingredientMap = new HashMap<>();
   
   public HardwareByIdConverter() {
-    ingredientMap.put("FLTO", 
-        new Hardware("FLTO", "Flour Tortilla", Type.WRAP));
-    ingredientMap.put("COTO", 
-        new Hardware("COTO", "Corn Tortilla", Type.WRAP));
-    ingredientMap.put("GRBF", 
-        new Hardware("GRBF", "Ground Beef", Type.PROTEIN));
-    ingredientMap.put("CARN", 
-        new Hardware("CARN", "Carnitas", Type.PROTEIN));
-    ingredientMap.put("TMTO", 
-        new Hardware("TMTO", "Diced Tomatoes", Type.VEGGIES));
-    ingredientMap.put("LETC", 
-        new Hardware("LETC", "Lettuce", Type.VEGGIES));
-    ingredientMap.put("CHED", 
-        new Hardware("CHED", "Cheddar", Type.CHEESE));
-    ingredientMap.put("JACK", 
-        new Hardware("JACK", "Monterrey Jack", Type.CHEESE));
-    ingredientMap.put("SLSA", 
-        new Hardware("SLSA", "Salsa", Type.SAUCE));
-    ingredientMap.put("SRCR", 
-        new Hardware("SRCR", "Sour Cream", Type.SAUCE));
+    ingredientMap.put("MATX", 
+        new Hardware("MATX", "mATX", Type.CASE));
+    ingredientMap.put("IITX", 
+        new Hardware("IITX", "ITX", Type.CASE));
+    ingredientMap.put("INTL", 
+        new Hardware("INTL", "Intel", Type.CPU));
+    ingredientMap.put("CAMD", 
+        new Hardware("CAMD", "AMD", Type.CPU));
+    ingredientMap.put("NVDA", 
+        new Hardware("NVDA", "Nvidia", Type.GPU));
+    ingredientMap.put("GAMD", 
+        new Hardware("GAMD", "AMD", Type.GPU));
+    ingredientMap.put("NORM", 
+        new Hardware("NORM", "1 TB", Type.STORAGE));
+    ingredientMap.put("CRZY", 
+        new Hardware("CRZY", "100 TB", Type.STORAGE));
+    ingredientMap.put("AAIR", 
+        new Hardware("AAIR", "Air", Type.COOLING));
+    ingredientMap.put("WATR", 
+        new Hardware("WATR", "Water", Type.COOLING));
   }
   
   @Override

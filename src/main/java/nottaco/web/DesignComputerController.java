@@ -29,16 +29,16 @@ public class DesignComputerController {
 @ModelAttribute
 public void addHardwaresToModel(Model model) {
 	List<Hardware> Hardwares = Arrays.asList(
-	  new Hardware("FLTO", "Flour Tortilla", Type.WRAP),
-	  new Hardware("COTO", "Corn Tortilla", Type.WRAP),
-	  new Hardware("GRBF", "Ground Beef", Type.PROTEIN),
-	  new Hardware("CARN", "Carnitas", Type.PROTEIN),
-	  new Hardware("TMTO", "Diced Tomatoes", Type.VEGGIES),
-	  new Hardware("LETC", "Lettuce", Type.VEGGIES),
-	  new Hardware("CHED", "Cheddar", Type.CHEESE),
-	  new Hardware("JACK", "Monterrey Jack", Type.CHEESE),
-	  new Hardware("SLSA", "Salsa", Type.SAUCE),
-	  new Hardware("SRCR", "Sour Cream", Type.SAUCE)
+	  new Hardware("MATX", "mATX", Type.CASE),
+	  new Hardware("IITX", "ITX", Type.CASE),
+	  new Hardware("INTL", "Intel", Type.CPU),
+	  new Hardware("CAMD", "AMD", Type.CPU),
+	  new Hardware("NVDA", "Nvidia", Type.GPU),
+	  new Hardware("GAMD", "AMD", Type.GPU),
+	  new Hardware("NORM", "1 TB", Type.STORAGE),
+	  new Hardware("CRZY", "100 TB", Type.STORAGE),
+	  new Hardware("AAIR", "Air", Type.COOLING),
+	  new Hardware("WATR", "Water", Type.COOLING)
 	);
 
 	Type[] types = Hardware.Type.values();

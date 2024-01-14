@@ -1,4 +1,4 @@
-package com.nottaco.assignment1;
+package nottaco;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;

@@ -17,13 +17,13 @@ import nottaco.Hardware.Type;
 import nottaco.Computer;
 import nottaco.ComputerOrder;
 
-import javax.validation.Valid;
+import jakarta.validation.Valid; // note: javax changed to jakarta
 import org.springframework.validation.Errors;
 
 @Slf4j
 @Controller
 @RequestMapping("/design")
-@SessionAttributes("tacoOrder")
+@SessionAttributes("computerOrder")
 public class DesignComputerController {
 
 @ModelAttribute
@@ -48,13 +48,13 @@ public void addHardwaresToModel(Model model) {
 	}
   }
 
-  @ModelAttribute(name = "tacoOrder")
+  @ModelAttribute(name = "computerOrder")
   public ComputerOrder order() {
     return new ComputerOrder();
   }
 
-  @ModelAttribute(name = "taco")
-  public Computer taco() {
+  @ModelAttribute(name = "computer")
+  public Computer computer() {
     return new Computer();
   }
 
@@ -74,12 +74,27 @@ public void addHardwaresToModel(Model model) {
   }
  */
 
-  @PostMapping
-  public String processComputer(
-		  @Valid Computer taco, Errors errors,
-		  @ModelAttribute ComputerOrder tacoOrder) {
+ @PostMapping
+ public String processComputer(
+         @Valid Computer computer, Errors errors,
+         @ModelAttribute ComputerOrder computerOrder) {
 
-    if (errors.hasErrors()) {
-      return "design";
-    }
+   if (errors.hasErrors()) {
+     return "design";
+   }
 
+   computerOrder.addComputer(computer);
+   log.info("Processing computer: {}", computer);
+
+   return "redirect:/orders/current";
+ }
+
+ private Iterable<Hardware> filterByType(
+     List<Hardware> hardwares, Type type) {
+   return hardwares
+             .stream()
+             .filter(x -> x.getType().equals(type))
+             .collect(Collectors.toList());
+ }
+
+}

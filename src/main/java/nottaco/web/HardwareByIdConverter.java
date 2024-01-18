@@ -13,9 +13,7 @@ import nottaco.data.HardwareRepository;
 
 @Component
 public class HardwareByIdConverter implements Converter<String, Hardware> {
-
-  private Map<String, Hardware> hardwareMap = new HashMap<>();
-  
+    
     private HardwareRepository hardwareRepo;
 
     @Autowired

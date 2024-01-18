@@ -3,43 +3,54 @@ package nottaco.web;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 
 import nottaco.Hardware;
 import nottaco.Hardware.Type;
+import nottaco.data.HardwareRepository;
 
 @Component
 public class HardwareByIdConverter implements Converter<String, Hardware> {
 
-  private Map<String, Hardware> ingredientMap = new HashMap<>();
+  private Map<String, Hardware> hardwareMap = new HashMap<>();
   
-  public HardwareByIdConverter() {
-    ingredientMap.put("MATX", 
+    private HardwareRepository hardwareRepo;
+
+    @Autowired
+    public HardwareByIdConverter(HardwareRepository hardwareRepo) {
+        this.hardwareRepo = hardwareRepo;
+    }
+
+    /* 
+    public HardwareByIdConverter() {
+    hardwareMap.put("MATX", 
         new Hardware("MATX", "mATX", Type.CASE));
-    ingredientMap.put("IITX", 
+    hardwareMap.put("IITX", 
         new Hardware("IITX", "ITX", Type.CASE));
-    ingredientMap.put("INTL", 
+    hardwareMap.put("INTL", 
         new Hardware("INTL", "Intel", Type.CPU));
-    ingredientMap.put("CAMD", 
+    hardwareMap.put("CAMD", 
         new Hardware("CAMD", "AMD", Type.CPU));
-    ingredientMap.put("NVDA", 
+    hardwareMap.put("NVDA", 
         new Hardware("NVDA", "Nvidia", Type.GPU));
-    ingredientMap.put("GAMD", 
+    hardwareMap.put("GAMD", 
         new Hardware("GAMD", "AMD", Type.GPU));
-    ingredientMap.put("NORM", 
+    hardwareMap.put("NORM", 
         new Hardware("NORM", "1 TB", Type.STORAGE));
-    ingredientMap.put("CRZY", 
+    hardwareMap.put("CRZY", 
         new Hardware("CRZY", "100 TB", Type.STORAGE));
-    ingredientMap.put("AAIR", 
+    hardwareMap.put("AAIR", 
         new Hardware("AAIR", "Air", Type.COOLING));
-    ingredientMap.put("WATR", 
+    hardwareMap.put("WATR", 
         new Hardware("WATR", "Water", Type.COOLING));
-  }
-  
-  @Override
-  public Hardware convert(String id) {
-    return ingredientMap.get(id);
-  }
+    }
+    */
+
+    @Override
+    public Hardware convert(String id) {
+    return hardwareRepo.findById(id).orElse(null);
+    }
 
 }

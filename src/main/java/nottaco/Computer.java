@@ -1,5 +1,6 @@
 package nottaco;
 
+import java.util.Date;
 import java.util.List;
 import jakarta.validation.constraints.NotNull; // note: javax changed to jakarta
 import jakarta.validation.constraints.Size; 
@@ -16,4 +17,7 @@ public class Computer {
     @NotNull
     @Size(min=1, message="You must choose at least 1 component")
     private List<Hardware> hardware;
+
+    private Long id;
+    private Date createdAt = new Date();
 }

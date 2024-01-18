@@ -8,11 +8,18 @@ import jakarta.validation.constraints.Digits; // note: javax changed to jakarta
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.NotBlank;
 
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
+
 import lombok.Data;
 
 @Data
-public class ComputerOrder {
+public class ComputerOrder implements Serializable {
+  private static final long serialVersionUID = 1L;
+  private Long id;
+  private Date placedAt;
+
   @NotBlank(message="Delivery name is required")
   private String deliveryName;
 

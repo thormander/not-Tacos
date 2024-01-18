@@ -4,12 +4,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
   <head>
-    <title>Taco Cloud</title>
+    <title>Computer Cloud</title>
     <link rel="stylesheet" th:href="@{/styles.css}" />
   </head>
 
   <body>
-    <h1>Design your taco!</h1>
+    <h1>Design your Computer!</h1>
     <img th:src="@{/images/storelogo.png}"/>
 
 <!-- tag::formTag[] -->
@@ -18,7 +18,7 @@
 
     <span class="validationError"
           th:if="${#fields.hasErrors('hardware')}"
-          th:errors="*{hardware}">Ingredient Error</span>
+          th:errors="*{hardware}">Hardware Error</span>
 
     <!-- tag::all[] -->
     <div class="grid">
@@ -63,7 +63,7 @@
       </div>
 
 	  <div class="hardware-group" id="cooling"> <!-- originally sauce -->
-      <h3>Select your sauce:</h3>
+      <h3>Select your cooling method:</h3>
       <div th:each="hardware : ${cooling}">
         <input th:field="*{hardware}" type="checkbox" 
                th:value="${hardware.id}"/>

@@ -5,7 +5,6 @@
       xmlns:th="http://www.thymeleaf.org">
   <head>
     <title>Computer Cloud</title>
-    <link rel="stylesheet" th:href="@{/styles.css}" />
   </head>
 
   <body>
@@ -17,8 +16,8 @@
     <!-- end::all[] -->
 
     <span class="validationError"
-          th:if="${#fields.hasErrors('hardware')}"
-          th:errors="*{hardware}">Hardware Error</span>
+          th:if="${#fields.hasErrors('hardwares')}"
+          th:errors="*{hardwares}">Hardware Error</span>
 
     <!-- tag::all[] -->
     <div class="grid">
@@ -28,7 +27,7 @@
 <!-- tag::designateWrap[] -->
       <h3>Pick your computer case:</h3> <!-- originally wrap -->
       <div th:each="hardware : ${case}">
-        <input th:field="*{hardware}" type="checkbox" 
+        <input th:field="*{hardwares}" type="checkbox" 
                th:value="${hardware.id}"/>
         <span th:text="${hardware.name}">HARDWARE</span><br/>
       </div>
@@ -38,7 +37,7 @@
 	  <div class="hardware-group" id="cpus"> <!-- originally protein -->
       <h3>Pick your CPU:</h3>
       <div th:each="hardware : ${cpu}">
-        <input th:field="*{hardware}" type="checkbox" 
+        <input th:field="*{hardwares}" type="checkbox" 
                th:value="${hardware.id}"/>
         <span th:text="${hardware.name}">HARDWARE</span><br/>
       </div>
@@ -47,7 +46,7 @@
 	  <div class="hardware-group" id="storage"> <!-- originally cheese -->
       <h3>Choose your GPU:</h3>
       <div th:each="hardware : ${storage}">
-        <input th:field="*{hardware}" type="checkbox" 
+        <input th:field="*{hardwares}" type="checkbox" 
                th:value="${hardware.id}"/>
         <span th:text="${hardware.name}">HARDWARE</span><br/>
       </div>

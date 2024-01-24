@@ -11,29 +11,26 @@ create table if not exists Computer_Order (
   placed_at timestamp not null
 );
 
+create table if not exists Hardware (
+  id varchar(4) not null,
+  name varchar(25) not null,
+  type varchar(10) not null,
+  primary key (id)
+);
+
 create table if not exists Computer (
-  id identity,
+  id IDENTITY,
   name varchar(50) not null,
   computer_order bigint not null,
   computer_order_key bigint not null,
-  created_at timestamp not null
+  created_at timestamp not null,
+  foreign key (computer_order) references Computer_Order(id)
 );
 
 create table if not exists Hardware_Ref (
   hardware varchar(4) not null,
   computer bigint not null,
-  computer_key bigint not null
+  computer_key bigint not null,
+  foreign key (hardware) references Hardware(id)
 );
-
-
-create table if not exists Hardware (
-  id varchar(4) not null,
-  name varchar(25) not null,
-  type varchar(10) not null
-);
-
-
-alter table Computer
-    add foreign key (computer_order) references Computer_Order(id);
-alter table Hardware_Ref
-    add foreign key (hardware) references Hardware(id);
+    

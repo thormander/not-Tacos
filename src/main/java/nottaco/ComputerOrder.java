@@ -1,24 +1,29 @@
 package nottaco;
-
-import java.util.List;
-
-import org.hibernate.validator.constraints.CreditCardNumber;
-
-import jakarta.validation.constraints.Digits; // note: javax changed to jakarta 
-import jakarta.validation.constraints.Pattern;
-import jakarta.validation.constraints.NotBlank;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+
+import jakarta.validation.constraints.Digits;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
+
+import org.hibernate.validator.constraints.CreditCardNumber;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.relational.core.mapping.Table;
 
 import lombok.Data;
 
 @Data
+@Table
 public class ComputerOrder implements Serializable {
+
   private static final long serialVersionUID = 1L;
+
+  @Id
   private Long id;
-  private Date placedAt;
+
+  private Date placedAt = new Date();
 
   @NotBlank(message="Delivery name is required")
   private String deliveryName;
@@ -46,6 +51,9 @@ public class ComputerOrder implements Serializable {
   private String ccCVV;
 
   private List<Computer> computers = new ArrayList<>();
+
   public void addComputer(Computer computer) {
     this.computers.add(computer);
-} }
+  }
+
+}

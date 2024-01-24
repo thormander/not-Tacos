@@ -1,54 +1,53 @@
 package nottaco.web;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
 
+import jakarta.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
-import lombok.extern.slf4j.Slf4j;
 import nottaco.Hardware;
 import nottaco.Hardware.Type;
-import nottaco.Computer;
 import nottaco.ComputerOrder;
+import nottaco.Computer;
 import nottaco.data.HardwareRepository;
 
-import jakarta.validation.Valid; // note: javax changed to jakarta
-import org.springframework.validation.Errors;
-
-@Slf4j
 @Controller
 @RequestMapping("/design")
-@SessionAttributes("computerOrder")
+@SessionAttributes("ComputerOrder")
 public class DesignComputerController {
-  
-  private final HardwareRepository hardwareRepo;
-  
+
+  private final HardwareRepository HardwareRepo;
+
   @Autowired
   public DesignComputerController(
-    HardwareRepository hardwareRepo) {
-      this.hardwareRepo = hardwareRepo;
+        HardwareRepository HardwareRepo) {
+    this.HardwareRepo = HardwareRepo;
   }
 
   @ModelAttribute
-  public void addIngredientsToModel(Model model) {
-    Iterable<Hardware> hardwares = hardwareRepo.findAll();
+  public void addHardwaresToModel(Model model) {
+    List<Hardware> Hardwares = new ArrayList<>();
+    HardwareRepo.findAll().forEach(i -> Hardwares.add(i));
+
     Type[] types = Hardware.Type.values();
     for (Type type : types) {
-      model.addAttribute(type.toString().toLowerCase(), filterByType(hardwares, type));
+      model.addAttribute(type.toString().toLowerCase(),
+          filterByType(Hardwares, type));
     }
   }
 
-  @ModelAttribute(name = "computerOrder")
+  @ModelAttribute(name = "ComputerOrder")
   public ComputerOrder order() {
     return new ComputerOrder();
   }
@@ -64,20 +63,24 @@ public class DesignComputerController {
   }
 
   @PostMapping
-  public String processComputer(@Valid Computer computer, Errors errors, @ModelAttribute ComputerOrder computerOrder) {
+  public String processComputer(
+      @Valid Computer computer, Errors errors,
+      @ModelAttribute ComputerOrder ComputerOrder) {
+
     if (errors.hasErrors()) {
       return "design";
     }
 
-    computerOrder.addComputer(computer);
-    log.info("Processing computer: {}", computer);
+    ComputerOrder.addComputer(computer);
 
     return "redirect:/orders/current";
   }
 
-  private Iterable<Hardware> filterByType(Iterable<Hardware> hardwares, Type type) {
-    return StreamSupport.stream(hardwares.spliterator(), false)
-              .filter(i -> i.getType().equals(type))
+  private Iterable<Hardware> filterByType(
+      List<Hardware> Hardwares, Type type) {
+    return Hardwares
+              .stream()
+              .filter(x -> x.getType().equals(type))
               .collect(Collectors.toList());
   }
 

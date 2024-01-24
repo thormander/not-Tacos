@@ -1,13 +1,9 @@
 package nottaco.data;
 
-import java.util.Optional;
+import org.springframework.data.repository.CrudRepository;
 
 import nottaco.ComputerOrder;
 
-public interface OrderRepository {
+public interface OrderRepository extends CrudRepository<ComputerOrder, Long> {
 
-    ComputerOrder save(ComputerOrder order);
-  
-    Optional<ComputerOrder> findById(Long id);
-  
-  }
+}

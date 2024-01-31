@@ -24,30 +24,30 @@ import nottaco.data.HardwareRepository;
 
 @Controller
 @RequestMapping("/design")
-@SessionAttributes("ComputerOrder")
+@SessionAttributes("computerOrder")
 public class DesignComputerController {
 
-  private final HardwareRepository HardwareRepo;
+  private final HardwareRepository hardwareRepo;
 
   @Autowired
   public DesignComputerController(
-        HardwareRepository HardwareRepo) {
-    this.HardwareRepo = HardwareRepo;
+        HardwareRepository hardwareRepo) {
+    this.hardwareRepo = hardwareRepo;
   }
 
   @ModelAttribute
   public void addHardwaresToModel(Model model) {
-    List<Hardware> Hardwares = new ArrayList<>();
-    HardwareRepo.findAll().forEach(i -> Hardwares.add(i));
+    List<Hardware> hardwares = new ArrayList<>();
+    hardwareRepo.findAll().forEach(i -> hardwares.add(i));
 
     Type[] types = Hardware.Type.values();
     for (Type type : types) {
       model.addAttribute(type.toString().toLowerCase(),
-          filterByType(Hardwares, type));
+          filterByType(hardwares, type));
     }
   }
 
-  @ModelAttribute(name = "ComputerOrder")
+  @ModelAttribute(name = "computerOrder")
   public ComputerOrder order() {
     return new ComputerOrder();
   }
@@ -65,20 +65,20 @@ public class DesignComputerController {
   @PostMapping
   public String processComputer(
       @Valid Computer computer, Errors errors,
-      @ModelAttribute ComputerOrder ComputerOrder) {
+      @ModelAttribute ComputerOrder computerOrder) {
 
     if (errors.hasErrors()) {
       return "design";
     }
 
-    ComputerOrder.addComputer(computer);
+    computerOrder.addComputer(computer);
 
     return "redirect:/orders/current";
   }
 
   private Iterable<Hardware> filterByType(
-      List<Hardware> Hardwares, Type type) {
-    return Hardwares
+      List<Hardware> hardwares, Type type) {
+    return hardwares
               .stream()
               .filter(x -> x.getType().equals(type))
               .collect(Collectors.toList());

@@ -1,9 +1,9 @@
 package nottaco.data;
 
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.mongodb.repository.MongoRepository;
 
 import nottaco.ComputerOrder;
 
-public interface OrderRepository extends CrudRepository<ComputerOrder, Long> {
+public interface OrderRepository extends MongoRepository<ComputerOrder, String> {
 
 }
